@@ -1,0 +1,20 @@
+{
+	"name": "tyranoscript",
+	"main": "app://./index.html",
+	"window": {
+		"title": "Teeching Feeling",
+		"icon": "link.png",
+		"toolbar": false,
+		"frame": true,
+		"width": 1350,
+		"height": 900,
+		"position": "front",
+    	"min_width": 750,
+    	"min_height": 500,
+	   	"max_width": 1920,
+    	"max_height": 1080
+	},
+	"webkit": {
+		"plugin": true
+	}
+}

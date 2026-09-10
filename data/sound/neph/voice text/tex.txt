@@ -1,0 +1,55 @@
+001 - "Ư... ah... Đừng ngại, cứ đâm (thúc) mạnh vào đi."
+002 - "Ư... cái... chuyển động rút ra đó... không chịu nổi nữa... ah..."
+003 - "Cơ thể này... ah... cũng đã dần quen với "cái đó" của em rồi nhỉ."
+004 - "Hì hì... Quả không hổ danh là 'thứ đó' mà chúng ta đã kỳ vọng."
+005 - "Được lắm... hãy đâm (chạm) vào tử cung mạnh hơn nữa đi..."
+006 - "Hơn nữa... hãy dùng cái thứ to lớn đó cọ xát mạnh vào (bên trong) đi...!"
+007 - "Á... quả nhiên là chúng ta cực kỳ hợp nhau mà..."
+008 - "Được lắm... hãy cọ xát mạnh hơn nữa vào tôi đi..."
+009 - "Nhìn xem, thấy không? Phần đầu đã lọt thỏm hoàn toàn vào trong chỗ đó của em rồi."
+010 - "Hì hì... đúng rồi... "cái đó" là phải như thế này mới đúng chứ."
+011 - "Ưm... thế nào? Cảm giác những nếp gấp (bên trong) đang quấn chặt lấy... ưm... cậu có cảm nhận được không?"
+012 - "Ưm... nếu tôi siết chặt như thế này thì... ưm... aah!"
+013 - "Ưm... ah... tôi cũng đang cảm thấy hưng phấn đây... không cần phải dè dặt gì đâu...!"
+014 - "Ưm... ah... thay cho phần của tôi, hãy cử động (nhấp) thật mạnh vào nhé."
+015 - "Ưm, ah! Mạnh hơn nữa... mãnh liệt hơn nữa đi...!"
+016 - "Cái này, ah... một sự mãnh liệt như thế này, ah... chính là điều tôi đã luôn chờ đợi...!"
+017 - "Aah... cảm giác rã rời này. Như thế này cũng thích thật đấy."
+018 - "Ưm... hì hì. Sự thúc đẩy (nhấp) không khoan nhượng này, tôi thích lắm đấy."
+019 - "Hà... hà... Quả nhiên là, (cậu/anh) khỏe thật đấy (dai sức thật đấy)."
+020 - "Ưm... ah... (em muốn) "cái đó" nhiều hơn nữa, nhiều hơn nữa..."
+021 - "Ưm... không cần phải lo cho tôi đâu."
+022 - "Ưm... phù... của em vẫn còn... làm được (tiếp tục được)
+023 - "Đúng rồi... mãi mãi... ưm... tôi muốn cứ làm chuyện đó với em mãi thôi."
+024 - "Ưm... ah... tôi... tôi... thích 'cái đó' (của em/cậu) lắm...!"
+025 - "Ưm... hì hì... em/cậu cũng 'thích' chuyện này quá nhỉ."
+026 - "Ưm... mất công làm chuyện này rồi. Hãy mạnh hơn nữa đi... ưm... ah..."
+027 - "Cái này... ah... (cảm giác) đang bùng cháy dần lên..."
+028 - "Ưm... ah... bị phát hiện hay không thì mặc kệ (tôi không quan tâm)!"
+029 - "Ưm... ah... (anh/em) khuấy động bên trong mãnh liệt hơn mọi khi..."
+030 - "Nande!"
+031 - "Hà... ah... mau lên... ah... mau làm dịu cơn đau nhói (sự râm ran) này đi cho tôi!"
+032 - "Ưm... Nào, mau ra (phóng) hết đi."
+033 - "Phù... được lắm. Hãy cho tôi thấy màn phóng tinh mãnh liệt của em/cậu đi."
+034 - "Ưm... hóa ra cảm giác này cũng khá là hạnh phúc (vui sướng) đấy nhỉ."
+035 - "Ưm... thật là, tuyệt vời nhất rồi... ah..."
+036 - "Đó là... tại cái 'của quý' dâm đãng này đấy."
+037 - "Ưm... ah... xin hãy để tôi ra, tôi muốn ra, muốn ra quá...!"
+038 - "Ưm... gì thế, sắp ra (lên đỉnh) rồi à? Nào, nào!"
+039 - Ư... một chút nữa thôi... thế nên là, cố lên đi!
+040 - Nào...! Tới luôn đi, hết mình vào!
+xh030531 - 041 - ...! Hãy xuất vào bên trong em đi...! Hãy xuất tinh đi... Hãy cho tất cả vào đây!
+042 - Hãy làm mạnh/mãnh liệt hơn nữa đi...
+043 - Quấn chặt lấy
+044 - nó đang quấn chặt lấy
+045 - chạm vào đúng chỗ đó
+046 - chạm tới chỗ đó rồi
+047 - hãy đâm vào đi
+048 - Em sắp phát điên mất... / Cảm giác lạ quá...
+049 - đang cọ xát
+050 - đang bị cọ xát
+051 - hãy nhẹ nhàng thôi
+052 - Cảm giác thật dễ chịu
+053 - em muốn cảm thấy dễ chịu
+xh080126 - 054 - anh giỏi quá
+

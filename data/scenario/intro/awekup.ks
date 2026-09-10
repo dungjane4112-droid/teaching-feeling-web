@@ -1,0 +1,48 @@
+*begin
+[eval exp="f.uncen='true'"]
+[eval exp="f.zince1=1000"]
+[eval exp="f.zince2=100"]
+[eval exp="f.zince3=10"]
+[eval exp="f.zince2_=2"]
+[eval exp="f.zince3_=3"]
+[eval exp="f.zince4_=4"]
+[eval exp="f.zince5_=5"]
+[eval exp="f.zince6_=6"]
+[eval exp="f.zince7_=7"]
+[eval exp="f.zince8_=8"]
+[eval exp="f.zince9_=9"]
+[eval exp="f.zince=f.zince3*f.zince1*f.zince1"]
+[eval exp="f.reven=10000000"]
+[eval exp="f.config_mod='max'"]
+[eval exp="f.lunch_check=0"]
+[eval exp="f.hp=100"][eval exp="f.bad_cold=0"][hp_return]
+[eval exp="f.drugk_c=0" ][eval exp="f.drugk_h=0" ]
+[eval exp="f.elect=0"][eval exp="f.water=0"][eval exp="f.gas=0"][eval exp="f.rice=25"][eval exp="f.foods=25"]
+[eval exp="f.veget=25"][eval exp="f.egg=25"][eval exp="f.crem=25"]
+[eval exp="f.elect_old=0"]
+[eval exp="f.water_old=0"]
+[eval exp="f.gas_old=0"]
+[eval exp="f.money_month=0"]
+[eval exp="f.money_owe=0"]
+[eval exp="f.game1=0"]
+[return]
+
+*sa
+[eval exp="f.update_save='030926'"]
+[return]
+*sa_tag
+[if exp="f.update_save=='030926'"]
+[else][eval exp="f.code_ss='non'"][endif][return]
+
+*mcr
+[eval exp="f.update_mcr='030926'"]
+[return]
+*mcr_tag
+[if exp="f.update_mcr=='030926'"][else]
+[cm]
+#Hệ thống
+Bạn cần update save để chơi tiếp.[r] 
+Hãy nhập "update" hoặc "101" vào thanh chat[r] 
+rồi click nút 'chat_cont' bên trái để update save.[p]
+[_][endif]
+[return]
