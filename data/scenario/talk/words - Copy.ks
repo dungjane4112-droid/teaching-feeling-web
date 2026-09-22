@@ -282,7 +282,7 @@
 [eval exp="f.water=0"]
 [call storage="mod/money_day.ks" target="*chi_phi"]
 [call storage="mod/money_day.ks" target="*return_money"]
-Lượng điện đã sử dụng ([emb exp="f.elect_old"]x2000đ), lượng gas đã sử dụng ([emb exp="f.gas_old"]x25Kđ), lượng nước đã sử dụng ([emb exp="f.water_old"]x20Kđ)[r] 
+Lượng điện đã sử dụng ([emb exp="f.elect_old"]x2000đ), lượng thuốc nổ đã sử dụng ([emb exp="f.gas_old"]x25Kđ), lượng nước đã sử dụng ([emb exp="f.water_old"]x20Kđ)[r] 
 Tổng chi phí hết: [emb exp="f.money_month"] đồng[p]
 Còn lại [money] đồng,[r] 
 Nợ [emb exp="f.money_owe"] đồng[p][end_talk]
@@ -356,10 +356,10 @@ Cộng 100 thân mật [p_][end_talk]
 Cộng 1000 thân mật [p_][end_talk]
 [elsif exp="f.c_word=='lust100'" ][eval exp="f.lust=f.lust+100"]
 #
-Cộng 100 ham muốn [p_][end_talk]
+Cộng 100 ham muốn ,aoc:bro à làm gì vậy tao đoán mày là minh bảo 🗿🐧🥀 [p_][end_talk]
 [elsif exp="f.c_word=='lust1000'" ][eval exp="f.lust=f.lust+1000"]
 #
-Cộng 1000 ham muốn [p_][end_talk]
+Cộng 1000 ham muốn ,aoc:bro à làm gì vậy tao đoán mày là minh bảo 🗿🐧🥀[p_][end_talk]
 
 [elsif exp="f.c_word=='soundoff'" ]
 [eval exp="f.sound_off=1" ]
@@ -382,7 +382,7 @@ Cộng 1000 ham muốn [p_][end_talk]
 [elsif exp="f.c_word=='quakeon'" ]
 [eval exp="f.config_mod='max'" ]
 #Hệ thống
--Bạn đã bật hiệu ứng rung trong game.[p]
+-Bạn đã bật hiệu ứng rung 🤨 trong game.[p]
 #
 [end_talk]
 ;;-------------------------------------------H---------------------------
