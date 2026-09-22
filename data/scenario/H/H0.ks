@@ -17,11 +17,13 @@
 
 *touch0
 ;[black]
-[bg time="0" method="crossfade" storage="H_rape/s00.jpg" ]
+[bg time="0" method="crossfade" storage="H_rape/mm.jpg" ]
+[playbgm storage="meme.ogg" loop="true"]
 [_]（Tôi thử chạm vào ngực của Sylvie[lr_]
 …Nhưng vì ngực cô ấy hơi nhỏ nên tôi vẫn chưa cảm giác gì cả。[p_]
 [syl]…？[p]
 [_]（cô ấy cựa quậy nhẹ nhàng, nhưng có vẻ em ấy không phản kháng lại[p_]
+[stopbgm]
 [eval exp="f.act=f.act+1" ]
 [eval exp="f.rape=0.1" ]
 [jump storage="sys/talk_lead.ks" target="*after_touch" ]
