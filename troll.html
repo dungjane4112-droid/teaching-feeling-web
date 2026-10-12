@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise!</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Pulse / Glitch overlay animations */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: inset 0 0 50px rgba(239, 68, 68, 0.3); }
+            50% { box-shadow: inset 0 0 100px rgba(239, 68, 68, 0.8); }
+        }
+
+        .troll-overlay {
+            animation: pulseGlow 2s infinite;
+        }
+
+        /* Custom pulsing button effect */
+        @keyframes btnPulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        .btn-pulse {
+            animation: btnPulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body class="bg-black text-white flex items-center justify-center relative select-none">
+
+    <!-- Fullscreen Video Element -->
+    <video 
+        id="trollVideo" 
+        class="w-full h-full object-cover fixed inset-0 z-0"
+        playsinline
+        preload="auto"
+    >
+        <source src="troll.mp4" type="video/mp4">
+        Trình duyệt của bạn không hỗ trợ video HTML5.
+    </video>
+
+    <!-- Autoplay Unmute Overlay (Shown only if browser blocks unmuted autoplay) -->
+    <div id="unmuteOverlay" class="fixed inset-0 z-20 flex flex-col items-center justify-center bg-black/80 backdrop-blur-md transition-opacity duration-300">
+        <div class="text-center p-6 max-w-md mx-auto">
+            <div class="w-20 h-20 bg-red-600/20 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/30 animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black text-white mb-2 tracking-wide uppercase">Nhấn để tiếp tục</h1>
+            <p class="text-gray-400 text-sm mb-6">Trình duyệt đã chặn tự động bật âm thanh. Nhấn vào nút bên dưới để mở trải nghiệm đầy đủ.</p>
+            <button id="startBtn" class="btn-pulse px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-lg transition-all duration-300 text-lg tracking-wider uppercase">
+                Bắt đầu ngay 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- Ambient Glitch / Edge Effect Layer -->
+    <div id="fxOverlay" class="fixed inset-0 z-10 pointer-events-none troll-overlay opacity-0 transition-opacity duration-500"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('trollVideo');
+            const unmuteOverlay = document.getElementById('unmuteOverlay');
+            const startBtn = document.getElementById('startBtn');
+            const fxOverlay = document.getElementById('fxOverlay');
+
+            // Function to handle video play with audio
+            async function playVideo() {
+                try {
+                    video.muted = false;
+                    await video.play();
+                    // If successfully played with audio, hide overlay
+                    unmuteOverlay.classList.add('opacity-0', 'pointer-events-none');
+                    fxOverlay.classList.remove('opacity-0');
+                    requestFullscreenIfPossible();
+                } catch (error) {
+                    console.warn("Autoplay with audio blocked by browser. Showing manual start button.", error);
+                    // Try playing muted as backup while showing overlay
+                    video.muted = true;
+                    video.play().catch(() => {});
+                    unmuteOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                }
+            }
+
+            // Attempt autoplay when page loads
+            playVideo();
+
+            // Click handler for user interaction fallback
+            startBtn.addEventListener('click', () => {
+                video.muted = false;
+                video.play();
+                unmuteOverlay.classList.add('opacity-0', 'pointer-events-none');
+                fxOverlay.classList.remove('opacity-0');
+                requestFullscreenIfPossible();
+            });
+
+            // Redirect to game.html when video ends
+            video.addEventListener('ended', () => {
+                window.location.href = 'game.html';
+            });
+
+            // Helper function to trigger fullscreen mode on click
+            function requestFullscreenIfPossible() {
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen().catch(() => {});
+                } else if (elem.webkitRequestFullscreen) { /* Safari */
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) { /* IE11 */
+                    elem.msRequestFullscreen();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
