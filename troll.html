@@ -16,62 +16,29 @@
         }
     </style>
 </head>
-<body class="bg-black flex items-center justify-center w-screen h-screen relative">
+<body class="bg-black w-screen h-screen flex items-center justify-center">
 
-    <!-- Video container covering the full screen with object-fit contain and black background -->
-    <div class="w-full h-full flex items-center justify-center bg-black relative">
-        <video id="trollVideo" class="w-full h-full object-contain" src="troll.mp4" playsinline></video>
-        
-        <!-- Fallback Play Button Overlay (shown if browser blocks autoplay) -->
-        <div id="playOverlay" class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center z-50 hidden">
-            <div class="text-center p-6 max-w-sm">
-                <h2 class="text-white text-xl font-bold mb-4">Sẵn sàng để bị troll chưa?</h2>
-                <button id="playBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full shadow-lg transform transition active:scale-95 flex items-center justify-center mx-auto space-x-2">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                    <span>Phát Video Ngay</span>
-                </button>
-            </div>
-        </div>
-    </div>
+    <video 
+        id="trollVideo" 
+        src="troll.mp4" 
+        autoplay 
+        muted 
+        playsinline 
+        class="w-full h-full object-cover bg-black">
+    </video>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const video = document.getElementById('trollVideo');
-            const playOverlay = document.getElementById('playOverlay');
-            const playBtn = document.getElementById('playBtn');
+        const video = document.getElementById('trollVideo');
+        
+        // Automatically redirect to game.html when the video finishes
+        video.addEventListener('ended', () => {
+            window.location.href = 'game.html';
+        });
 
-            // Function to handle video completion and redirection
-            video.addEventListener('ended', () => {
-                window.location.href = 'game.html';
-            });
-
-            // Attempt to autoplay the video immediately
-            const playPromise = video.play();
-
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    // Autoplay was prevented by browser policy, show overlay button
-                    console.log("Autoplay blocked, showing user interaction overlay.");
-                    playOverlay.classList.remove('hidden');
-                });
-            }
-
-            // Handle manual play click
-            playBtn.addEventListener('click', () => {
-                playOverlay.classList.add('hidden');
-                video.play().catch(err => {
-                    console.error("Playback failed even after click:", err);
-                });
-            });
-
-            // Also allow clicking anywhere on screen to play if blocked
-            playOverlay.addEventListener('click', (e) => {
-                if(e.target === playOverlay) {
-                    playOverlay.classList.add('hidden');
-                    video.play();
-                }
-            });
+        // Ensure playback triggers immediately
+        video.play().catch(err => {
+            console.log("Autoplay handled silently:", err);
         });
     </script>
 </body>
-                    </html>
+</html>
