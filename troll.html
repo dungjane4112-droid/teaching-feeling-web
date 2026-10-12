@@ -3,118 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fullscreen Troll Video</title>
+    <title>Troll Video Player</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000;
+        body, html {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
             overflow: hidden;
-            width: 100vw;
-            height: 100vh;
-        }
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: inset 0 0 30px rgba(239, 68, 68, 0.3); }
-            50% { box-shadow: inset 0 0 80px rgba(239, 68, 68, 0.8); }
-        }
-        .troll-glow {
-            animation: pulseGlow 2s infinite ease-in-out;
-        }
-        @keyframes bounceBtn {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        .animate-bounce-slow {
-            animation: bounceBtn 2s infinite ease-in-out;
         }
     </style>
 </head>
-<body class="bg-black text-white flex items-center justify-center relative select-none w-screen h-screen overflow-hidden">
+<body class="bg-black flex items-center justify-center w-screen h-screen relative">
 
-    <!-- object-contain ensures video is never stretched or distorted while fitting into the viewport -->
-    <div class="fixed inset-0 w-full h-full bg-black flex items-center justify-center z-0">
-        <video 
-            id="trollVideo" 
-            class="w-full h-full object-contain max-w-full max-h-full"
-            playsinline
-            preload="auto"
-        >
-            <source src="troll.mp4" type="video/mp4">
-            Trình duyệt của bạn không hỗ trợ video HTML5.
-        </video>
-    </div>
-
-    <div id="unmuteOverlay" class="fixed inset-0 z-20 flex flex-col items-center justify-center bg-black/80 backdrop-blur-md transition-opacity duration-500">
-        <div class="text-center p-8 max-w-md mx-4 bg-slate-900/90 border border-red-500/30 rounded-3xl shadow-2xl troll-glow">
-            <div class="w-20 h-20 bg-red-600/20 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/40 animate-bounce-slow shadow-inner">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+    <!-- Video container covering the full screen with object-fit contain and black background -->
+    <div class="w-full h-full flex items-center justify-center bg-black relative">
+        <video id="trollVideo" class="w-full h-full object-contain" src="troll.mp4" playsinline></video>
+        
+        <!-- Fallback Play Button Overlay (shown if browser blocks autoplay) -->
+        <div id="playOverlay" class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center z-50 hidden">
+            <div class="text-center p-6 max-w-sm">
+                <h2 class="text-white text-xl font-bold mb-4">Sẵn sàng để bị troll chưa?</h2>
+                <button id="playBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full shadow-lg transform transition active:scale-95 flex items-center justify-center mx-auto space-x-2">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    <span>Phát Video Ngay</span>
+                </button>
             </div>
-            <h1 class="text-2xl sm:text-3xl font-black text-white mb-3 tracking-wide uppercase">Sẵn sàng chưa?</h1>
-            <p class="text-gray-300 text-sm mb-8 leading-relaxed">Nhấn nút bên dưới để bật âm thanh và khởi động trải nghiệm full màn hình!</p>
-            <button id="startBtn" class="w-full py-4 px-6 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-2xl shadow-lg shadow-red-600/40 transition-all duration-300 text-lg tracking-wider uppercase cursor-pointer hover:scale-105 active:scale-95">
-                Bắt đầu ngay 🚀
-            </button>
         </div>
     </div>
-
-    <div id="fxOverlay" class="fixed inset-0 z-10 pointer-events-none troll-glow opacity-0 transition-opacity duration-500"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const video = document.getElementById('trollVideo');
-            const unmuteOverlay = document.getElementById('unmuteOverlay');
-            const startBtn = document.getElementById('startBtn');
-            const fxOverlay = document.getElementById('fxOverlay');
+            const playOverlay = document.getElementById('playOverlay');
+            const playBtn = document.getElementById('playBtn');
 
-            // Attempt autoplay with sound
-            async function initAutoplay() {
-                try {
-                    video.muted = false;
-                    await video.play();
-                    // Autoplay succeeded with sound
-                    unmuteOverlay.classList.add('opacity-0', 'pointer-events-none');
-                    fxOverlay.classList.remove('opacity-0');
-                    requestFullscreen();
-                } catch (e) {
-                    // Autoplay with sound was blocked by browser
-                    video.muted = true;
-                    video.play().catch(() => {});
-                    unmuteOverlay.classList.remove('opacity-0', 'pointer-events-none');
-                }
-            }
-
-            initAutoplay();
-
-            // Handle start button click
-            startBtn.addEventListener('click', () => {
-                video.muted = false;
-                video.play();
-                unmuteOverlay.classList.add('opacity-0', 'pointer-events-none');
-                fxOverlay.classList.remove('opacity-0');
-                requestFullscreen();
-            });
-
-            // Redirect to game.html when video ends
+            // Function to handle video completion and redirection
             video.addEventListener('ended', () => {
                 window.location.href = 'game.html';
             });
 
-            function requestFullscreen() {
-                const elem = document.documentElement;
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen().catch(() => {});
-                } else if (elem.webkitRequestFullscreen) {
-                    elem.webkitRequestFullscreen();
-                } else if (elem.msRequestFullscreen) {
-                    elem.msRequestFullscreen();
-                }
+            // Attempt to autoplay the video immediately
+            const playPromise = video.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    // Autoplay was prevented by browser policy, show overlay button
+                    console.log("Autoplay blocked, showing user interaction overlay.");
+                    playOverlay.classList.remove('hidden');
+                });
             }
+
+            // Handle manual play click
+            playBtn.addEventListener('click', () => {
+                playOverlay.classList.add('hidden');
+                video.play().catch(err => {
+                    console.error("Playback failed even after click:", err);
+                });
+            });
+
+            // Also allow clicking anywhere on screen to play if blocked
+            playOverlay.addEventListener('click', (e) => {
+                if(e.target === playOverlay) {
+                    playOverlay.classList.add('hidden');
+                    video.play();
+                }
+            });
         });
     </script>
 </body>
-</html>
+                    </html>
