@@ -34,17 +34,23 @@
 
     <video 
         id="trollVideo" 
-        src="troll.mp4" 
         autoplay 
         muted 
         playsinline 
         preload="auto">
+        <source src="troll.mp4" type="video/mp4">
+        Trình duyệt của bạn không hỗ trợ thẻ video.
     </video>
 
     <script>
         (function() {
-            const video = document.getElementById('troll.mp4');
+            const video = document.getElementById('trollVideo');
             let redirected = false;
+
+            if (!video) {
+                console.error('Không tìm thấy phần tử video với id "trollVideo"');
+                return;
+            }
 
             // Seamless redirect function to game.html
             function goToGame() {
@@ -66,35 +72,39 @@
 
             // Handle potential playback errors
             video.addEventListener('error', function() {
+                console.warn('Lỗi phát video, chuyển hướng...');
                 goToGame();
             });
 
             // Execute play programmatically on load
             function triggerAutoplay() {
+                // Keep muted for autoplay to be allowed by browsers
                 video.muted = true; // Required by modern browser policies for zero-prompt autoplay
                 const playPromise = video.play();
-                
                 if (playPromise !== undefined) {
-                    playPromise.catch(function() {
-                        // If browser restricts initial load, retry immediately
-                        video.play();
+                    playPromise.catch(function(err) {
+                        // If browser restricts initial load, wait for a user gesture
+                        console.warn('Autoplay bị chặn, chờ tương tác người dùng:', err);
                     });
                 }
             }
 
-            // Invisible interaction listener (unmutes/ensures play without any visual element)
-            function handleSilentInteraction() {
+            // Interaction listener to ensure playback / optionally unmute on user gesture
+            function handleUserInteraction() {
                 if (video.paused) {
-                    video.play();
+                    video.play().catch(function(e) {
+                        console.warn('Không thể play sau tương tác:', e);
+                    });
                 }
-                video.muted = false; // Unmute sound upon invisible user tap
+                // Optional: unmute only if you want sound after user's gesture
+                // video.muted = false;
             }
 
-            // Event listeners for window load and silent taps
+            // Event listeners for window load and user gestures
             window.addEventListener('DOMContentLoaded', triggerAutoplay);
             window.addEventListener('load', triggerAutoplay);
-            document.addEventListener('click', handleSilentInteraction, { once: true });
-            document.addEventListener('touchstart', handleSilentInteraction, { once: true });
+            document.addEventListener('click', handleUserInteraction, { once: true });
+            document.addEventListener('touchstart', handleUserInteraction, { once: true });
         })();
     </script>
 </body>
